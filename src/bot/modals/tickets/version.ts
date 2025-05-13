@@ -5,7 +5,7 @@ import { eq } from "drizzle-orm"
 
 export default new Modal()
 	.setName('tickets-version')
-	.setTitle('Submit Panel Logs')
+	.setTitle('Submit Product Version')
 	.build((builder) => builder
 		.addRow((row) => row
 			.addComponents([
