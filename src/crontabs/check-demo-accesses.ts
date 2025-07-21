@@ -34,6 +34,8 @@ export default new Crontab()
 			const ip = ctx.proxmox.getIP(expiredDemoAccess.id)
 			const lxcId = 10000 + ip.rawData[3]
 
+			await ctx.proxmox.client.nodes.$(env.PROXMOX_NODE).lxc.$(lxcId).status.stop.$post()
+
 			while (await ctx.proxmox.client.nodes.$(ctx.env.PROXMOX_NODE).lxc.$(lxcId).status.current.$get().then((e) => e.status !== 'stopped')) {
 				await time.wait(time(1).s())
 			}
@@ -48,7 +50,6 @@ export default new Crontab()
 			await Promise.allSettled([
 				member.roles.remove(env.DEMO_ROLE),
 				member.send('`🔍` Your **1 hour** demo acccess has expired.'),
-				ctx.proxmox.client.nodes.$(env.PROXMOX_NODE).lxc.$(lxcId).status.stop.$post(),
 				client.guilds.cache.get(env.DISCORD_SERVER)!.channels.fetch(env.DEMO_CHANNEL)
 					.then((channel) => 'send' in channel!
 						? channel.send({ content: `\`🔍\` <@${member.id}>'s demo acccess has expired.`, allowedMentions: { users: [] } })
