@@ -25,6 +25,7 @@
     "proxmox-api": "^1.1.1",
     "rjweb-server": "^9.8.6",
     "tesseract.js": "^6.0.1",
+    "undici": "6.21.3",
     "zod": "^3.25.48"
   },
   "devDependencies": {

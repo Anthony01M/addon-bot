@@ -1,8 +1,19 @@
 import env from "@/globals/env"
 import proxmoxApi from "proxmox-api"
+import { fetch, Agent } from "undici"
+
+const agent = new Agent({
+	connect: {
+		rejectUnauthorized: false
+	}
+})
 
 export const client = proxmoxApi({
 	host: env.PROXMOX_HOST,
+	fetch: (url, options) => fetch(url, {
+		...options,
+		dispatcher: agent,
+	}),
 	password: env.PROXMOX_PASSWORD
 })
 
