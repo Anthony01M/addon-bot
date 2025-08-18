@@ -22,7 +22,7 @@ export const client = proxmoxApi({
  * @since 1.15.0
 */ export function getIP(id: number) {
 	const ip = env.PROXMOX_NET_IP.first()
-	ip.rawData[3] = 10 + (id % 246)
+	ip.rawData[3] = 10 + (id % 245)
 
 	return ip
 }
