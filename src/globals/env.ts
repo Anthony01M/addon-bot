@@ -17,6 +17,7 @@ const infos = z.object({
 	DATABASE_URL: z.string(),
 	SENTRY_URL: z.string().optional(),
 	DISCORD_SERVER: z.string(),
+	DISCORD_CHANNEL: z.string(),
 
 	BOT_TOKEN: z.string(),
 	SXC_TOKEN: z.string(),
